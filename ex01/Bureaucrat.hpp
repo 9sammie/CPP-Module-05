@@ -6,7 +6,7 @@
 /*   By: maballet <maballet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 18:24:16 by maballet          #+#    #+#             */
-/*   Updated: 2026/01/12 22:45:02 by maballet         ###   ########lyon.fr   */
+/*   Updated: 2026/01/13 00:27:07 by maballet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 #define BUREAUCRATE_HPP
 
 #include <iostream>
+#include "Form.hpp"
 
 #define STD			"\033[0m"
 #define GREYBG		"\033[48;5;237m"
+
+class Form;
 
 class Bureaucrat {
 
@@ -36,6 +39,7 @@ class Bureaucrat {
 	int			getGrade() const;
 	void		incrementGrade();
 	void		decrementGrade();
+	void		signForm(Form& f);
 
 };
 

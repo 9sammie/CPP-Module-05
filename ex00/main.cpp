@@ -6,7 +6,7 @@
 /*   By: maballet <maballet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 20:12:13 by maballet          #+#    #+#             */
-/*   Updated: 2026/01/12 21:14:14 by maballet         ###   ########lyon.fr   */
+/*   Updated: 2026/01/12 22:47:47 by maballet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int main()
 	try
 	{
 		Bureaucrat a("Gustave", 42);
-		std::cout << a.getname() << ": grade " << a.getGrade() << std::endl;
+		std::cout << a << std::endl;
 	}
 	catch (std::exception& e)
 	{
@@ -49,7 +49,7 @@ int main()
 	try
 	{
 		Bureaucrat d("Verso", 1);
-		std::cout << d.getname() << ": grade " << d.getGrade() << std::endl;
+		std::cout << d << std::endl;
 		d.incrementGrade();
 	}
 	catch (std::exception& e)
@@ -61,7 +61,7 @@ int main()
 	try
 	{
 		Bureaucrat e("Esquie", 150);
-		std::cout << e.getname() << ": grade " << e.getGrade() << std::endl;
+		std::cout << e << std::endl;
 		e.decrementGrade();
 	}
 	catch (std::exception& e)
@@ -76,10 +76,10 @@ int main()
 		Bureaucrat g(f);
 		Bureaucrat h("Lune", 50);
 
-		std::cout << h.getname() << ": grade " << h.getGrade() << std::endl;
+		std::cout << h.getName() << ": grade " << h.getGrade() << std::endl;
 		h = f;
-		std::cout << g.getname() << ": grade " << g.getGrade() << std::endl;
-		std::cout << h.getname() << ": grade " << h.getGrade() << std::endl;
+		std::cout << g.getName() << ": grade " << g.getGrade() << std::endl;
+		std::cout << h.getName() << ": grade " << h.getGrade() << std::endl;
 	}
 	catch (std::exception& e)
 	{

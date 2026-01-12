@@ -6,7 +6,7 @@
 /*   By: maballet <maballet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 19:31:28 by maballet          #+#    #+#             */
-/*   Updated: 2026/01/12 22:51:10 by maballet         ###   ########lyon.fr   */
+/*   Updated: 2026/01/13 00:21:11 by maballet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,18 @@ void Bureaucrat::decrementGrade()
 	this->_grade++;
 	if (this->_grade > 150)
 		throw GradeTooLowException();
+}
+
+void Bureaucrat::signForm(Form& f)
+{
+	try
+	{
+		f.beSigned(*this);
+		std::cout << _name << " signed " << f.getName() << std::endl;
+	}
+	catch (std::exception& e)
+	{
+		std::cout << _name << " couldn’t sign " << f.getName() << " because "
+		<< e.what() << std::endl;
+	}
 }
