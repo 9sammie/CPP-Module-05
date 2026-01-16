@@ -6,84 +6,94 @@
 /*   By: maballet <maballet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 20:12:13 by maballet          #+#    #+#             */
-/*   Updated: 2026/01/12 22:47:47 by maballet         ###   ########lyon.fr   */
+/*   Updated: 2026/01/16 16:22:24 by maballet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
+void tryCreateBureaucrat(const std::string& name, int grade)
+{
+	try
+	{
+		Bureaucrat b(name, grade);
+		std::cout << GREEN << b << STD << std::endl;
+	}
+	catch (std::exception& e)
+	{
+		std::cout << PINK << "Error: " << e.what() << STD << std::endl;
+	}
+}
+
+void tryIncrement(const std::string& name, int grade)
+{
+	try
+	{
+		Bureaucrat b(name, grade);
+		std::cout << GREEN << b << STD << std::endl;
+		b.incrementGrade();
+		std::cout << GREEN << "After increment: " << b << STD << std::endl;
+	}
+	catch (std::exception& e)
+	{
+		std::cout << PINK << "Error: " << e.what() << STD << std::endl;
+	}
+}
+
+void tryDecrement(const std::string& name, int grade)
+{
+	try
+	{
+		Bureaucrat b(name, grade);
+		std::cout << GREEN << b << STD << std::endl;
+		b.decrementGrade();
+		std::cout << GREEN << "After decrement: " << b << STD << std::endl;
+	}
+	catch (std::exception& e)
+	{
+		std::cout << PINK << "Error: " << e.what() << STD << std::endl;
+	}
+}
+
+void tryCopyAssign()
+{
+	try
+	{
+		Bureaucrat original("Sciel", 10);
+		Bureaucrat copy(original);
+		Bureaucrat assigned("Lune", 50);
+
+		std::cout << BLUE << "Before assignment: " << assigned << STD << std::endl;
+		assigned = original;
+
+		std::cout << GREEN << "Copy: " << copy << STD << std::endl;
+		std::cout << BLUE << "Assigned: " << assigned << STD << std::endl;
+	}
+	catch (std::exception& e)
+	{
+		std::cout << PINK << "Error: " << e.what() << STD << std::endl;
+	}
+}
+
 int main()
 {
-	std::cout << GREYBG <<  "=== Valide ===" << STD << std::endl << std::endl;
-	try
-	{
-		Bureaucrat a("Gustave", 42);
-		std::cout << a << std::endl;
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "Error: " << e.what() << std::endl;
-	}
+	std::cout << GREYBG << "=== Valide ===" << STD << "\n\n";
+	tryCreateBureaucrat("Gustave", 42);
 
-	std::cout << std::endl << std::endl << GREYBG << "=== Grade trop haut (0) ===" << STD << std::endl << std::endl;
-	try
-	{
-		Bureaucrat b("Maelle", 0);
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "Error: " << e.what() << std::endl;
-	}
+	std::cout << "\n\n" << GREYBG << "=== Grade trop haut (0) ===" << STD << "\n\n";
+	tryCreateBureaucrat("Maelle", 0);
 
-	std::cout << std::endl << std::endl << GREYBG << "=== Grade trop bas (151) ===" << STD << std::endl << std::endl;
-	try
-	{
-		Bureaucrat c("Aline", 151);
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "Error: " << e.what() << std::endl;
-	}
+	std::cout << "\n\n" << GREYBG << "=== Grade trop bas (151) ===" << STD << "\n\n";
+	tryCreateBureaucrat("Aline", 151);
 
-	std::cout << std::endl << std::endl << GREYBG << "=== Incrémenter depuis 1 ===" << STD << std::endl << std::endl;
-	try
-	{
-		Bureaucrat d("Verso", 1);
-		std::cout << d << std::endl;
-		d.incrementGrade();
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "Error: " << e.what() << std::endl;
-	}
+	std::cout << "\n\n" << GREYBG << "=== Incrémenter depuis 1 ===" << STD << "\n\n";
+	tryIncrement("Verso", 1);
 
-	std::cout << std::endl << std::endl << GREYBG << "=== Décrémenter depuis 150 ===" << STD << std::endl << std::endl;
-	try
-	{
-		Bureaucrat e("Esquie", 150);
-		std::cout << e << std::endl;
-		e.decrementGrade();
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "Error: " << e.what() << std::endl;
-	}
+	std::cout << "\n\n" << GREYBG << "=== Décrémenter depuis 150 ===" << STD << "\n\n";
+	tryDecrement("Esquie", 150);
 
-	std::cout << std::endl << std::endl << GREYBG << "=== Copie et affectation ===" << STD << std::endl << std::endl;
-	try
-	{
-		Bureaucrat f("Sciel", 10);
-		Bureaucrat g(f);
-		Bureaucrat h("Lune", 50);
+	std::cout << "\n\n" << GREYBG << "=== Copie et affectation ===" << STD << "\n\n";
+	tryCopyAssign();
 
-		std::cout << h.getName() << ": grade " << h.getGrade() << std::endl;
-		h = f;
-		std::cout << g.getName() << ": grade " << g.getGrade() << std::endl;
-		std::cout << h.getName() << ": grade " << h.getGrade() << std::endl;
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "Error: " << e.what() << std::endl;
-	}
 	return 0;
 }

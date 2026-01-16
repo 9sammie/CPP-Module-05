@@ -6,7 +6,7 @@
 /*   By: maballet <maballet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 19:31:28 by maballet          #+#    #+#             */
-/*   Updated: 2026/01/16 16:10:29 by maballet         ###   ########lyon.fr   */
+/*   Updated: 2026/01/16 15:39:38 by maballet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,12 @@ void Bureaucrat::decrementGrade()
 		throw GradeTooLowException();
 }
 
-void Bureaucrat::signForm(Form& f)
+void Bureaucrat::signForm(AForm& f)
 {
 	f.beSigned(*this);
+}
+
+void Bureaucrat::executeForm(AForm const & form) const
+{
+	form.execute(*this);
 }
