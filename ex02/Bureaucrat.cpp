@@ -6,7 +6,7 @@
 /*   By: maballet <maballet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 19:31:28 by maballet          #+#    #+#             */
-/*   Updated: 2026/02/12 22:08:14 by maballet         ###   ########lyon.fr   */
+/*   Updated: 2026/02/12 22:49:18 by maballet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ int Bureaucrat::getGrade() const
 
 void Bureaucrat::incrementGrade() 
 {
-	this->_grade--;
 	if (this->_grade < 1)
 		throw Bureaucrat::GradeTooHighException();
+	this->_grade--;
 }
 
 void Bureaucrat::decrementGrade()
 {
-	this->_grade++;
 	if (this->_grade > 150)
 		throw Bureaucrat::GradeTooLowException();
+	this->_grade++;
 }
 
 void Bureaucrat::signForm(AForm& f)
