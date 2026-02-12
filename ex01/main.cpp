@@ -6,7 +6,7 @@
 /*   By: maballet <maballet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 20:12:13 by maballet          #+#    #+#             */
-/*   Updated: 2026/01/16 16:15:43 by maballet         ###   ########lyon.fr   */
+/*   Updated: 2026/02/12 18:28:25 by maballet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int main()
 		Form report("Report", 20, 10);
 
 		std::cout << GREEN << report << STD << std::endl;
-		trySign(boss, report);
+		boss.signForm(report);
 		std::cout << GREEN << report << STD << std::endl;
 	}
 
@@ -90,7 +90,7 @@ int main()
 		Form topSecret("TopSecret", 50, 10);
 
 		std::cout << GREEN << topSecret << STD << std::endl;
-		trySign(intern, topSecret);
+		intern.signForm(topSecret);
 		std::cout << GREEN << topSecret << STD << std::endl;
 	}
 
@@ -99,8 +99,8 @@ int main()
 		Bureaucrat chief("Chief", 1);
 		Form order("Order66", 1, 1);
 
-		trySign(chief, order);
-		trySign(chief, order);
+		chief.signForm(order);
+
 		std::cout << GREEN << order << STD << std::endl;
 	}
 

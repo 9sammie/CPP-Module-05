@@ -1,62 +1,57 @@
 ################################################################################
-###									PROGRAM ###
+###									PROGRAM									 ###
 ################################################################################
 
-NAME					=		BureaucratsAndForms
+NAME		=		Intern
+
+CXX			=		c++
+
+CXXFLAGS	=		-std=c++98 -Wall -Wextra -Werror -MMD -MP
+
+MAKEFLAGS	+=		--no-print-directory -j$(nproc)
 
 ################################################################################
-###									COMPILE ###
+###									DIRECTORY								 ###
 ################################################################################
 
-CXX						=		c++
+OBJ_DIR		=		obj
 
 ################################################################################
-###									DIRECTORY ###
+###									FILES									 ###
 ################################################################################
 
-OBJ_DIR					=		obj
+SRC			=		main.cpp Bureaucrat.cpp AForm.cpp \
+					PresidentialPardonForm.cpp RobotomyRequestForm.cpp \
+					ShrubberyCreationForm.cpp Intern.cpp
+
+OBJ			=		$(SRC:%.cpp=$(OBJ_DIR)/%.o)
+
+DEP			=		$(OBJ:%.o=%.d)
 
 ################################################################################
-###									FLAGS	 ###
-################################################################################
-
-CFLAGS					=		-std=c++98 -Wall -Wextra -Werror
-
-################################################################################
-###									FILES	 ###
-################################################################################
-
-HEADERS					=		Bureaucrat.hpp AForm.hpp PresidentialPardonForm.hpp \
-								RobotomyRequestForm.hpp ShrubberyCreationForm.hpp \
-								Intern.hpp
-
-SRC						=		main.cpp Bureaucrat.cpp AForm.cpp \
-								PresidentialPardonForm.cpp RobotomyRequestForm.cpp \
-								ShrubberyCreationForm.cpp Intern.cpp
-
-OBJ						=		$(SRC:%.cpp=$(OBJ_DIR)/%.o)
-
-################################################################################
-###									ARCHIVES ###
+###									ARCHIVES								 ###
 ################################################################################
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) Makefile
 			$(CXX) $(CFLAGS) $(OBJ) -o $(NAME)
 
-$(OBJ_DIR)/%.o: %.cpp $(HEADERS) | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: %.cpp | $(OBJ_DIR)
 			$(CXX) $(CFLAGS) -o $@ -c $<
 
 $(OBJ_DIR):
 			mkdir -p $(OBJ_DIR)
+
+-include $(DEP)
 
 re: fclean
 			$(MAKE) all
 
 fclean: clean
 			rm -f $(NAME)
-			rm garden_shrubbery
+			rm -f garden_shrubbery
+			rm -f home_shrubbery
 
 clean: 
 			rm -rf $(OBJ_DIR)

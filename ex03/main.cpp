@@ -6,7 +6,7 @@
 /*   By: maballet <maballet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 20:12:13 by maballet          #+#    #+#             */
-/*   Updated: 2026/01/16 15:59:21 by maballet         ###   ########lyon.fr   */
+/*   Updated: 2026/02/12 22:18:21 by maballet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,6 @@
 #include "PresidentialPardonForm.hpp"
 #include "Intern.hpp"
 #include <cstdlib>
-
-void tryExecute(Bureaucrat& b, AForm& f)
-{
-	try
-	{
-		b.executeForm(f);
-		std::cout << GREEN << b.getName() << " executed " << f.getName() << STD << std::endl;
-	}
-	catch (std::exception& e)
-	{
-		std::cout << PINK << b.getName() << " couldn't execute " << f.getName()
-				<< " because " << e.what() << " (ó﹏ò｡)" << STD << std::endl;
-	}
-}
-
-void trySign(Bureaucrat& b, AForm& f)
-{
-	try
-	{
-		b.signForm(f);
-		std::cout << YELLOW << b.getName() << " signed " << f.getName() << STD << std::endl;
-	}
-	catch (std::exception& e)
-	{
-		std::cout << PINK << b.getName() << " couldn't sign " << f.getName()
-				<< " because " << e.what() << " (ó﹏ò｡)" << STD << std::endl;
-	}
-}
 
 int main()
 {
@@ -73,39 +45,39 @@ int main()
 
 	std::cout << std::endl << std::endl << GREYBG << "=== EXECUTE WITHOUT SIGNING ===" << STD << std::endl << std::endl;
 
-	tryExecute(boss, shrub);
-	tryExecute(boss, robot);
-	tryExecute(boss, pardon);
+	boss.executeForm(shrub);
+	boss.executeForm(robot);
+	boss.executeForm(pardon);
 	
 	std::cout << std::endl << std::endl << GREYBG << "=== SIGN FORMS WITH INSUFFICIENT GRADE ===" << STD << std::endl << std::endl;
 
-	trySign(intern, shrub);
-	trySign(intern, robot);
-	trySign(intern, pardon);
+	intern.signForm(shrub);
+	intern.signForm(robot);
+	intern.signForm(pardon);
 	
 	std::cout << std::endl << std::endl << GREYBG << "=== SIGN FORMS WITH PROPER GRADES ===" << STD << std::endl << std::endl;
 
-	trySign(manager, shrub);
-	trySign(manager, robot);
-	trySign(boss, pardon);
+	manager.signForm(shrub);
+	manager.signForm(robot);
+	boss.signForm(pardon);
 
 	std::cout << std::endl << std::endl << GREYBG << "=== EXECUTE WITH INSUFFICIENT GRADE ===" << STD << std::endl << std::endl;
 
-	tryExecute(manager, pardon);
-	tryExecute(intern, shrub);
-	tryExecute(intern, robot);
+	manager.executeForm(pardon);
+	intern.executeForm(shrub);
+	intern.executeForm(robot);
 	
 	std::cout << std::endl << std::endl << GREYBG << "=== EXECUTE WITH PROPER GRADES ===" << STD << std::endl << std::endl;
 
-	tryExecute(boss, shrub);
-	tryExecute(boss, robot);
-	tryExecute(boss, pardon);
+	boss.executeForm(shrub);
+	boss.executeForm(robot);
+	boss.executeForm(pardon);
 	
 	std::cout << std::endl << std::endl << GREYBG << "=== MULTIPLE ROBOTOMY TESTS ===" << STD << std::endl << std::endl;
 
 	for (int i = 0; i < 5; i++)
 	{
-		tryExecute(boss, robot);
+		boss.executeForm(robot);
 		std::cout << std::endl;
 	}
 
@@ -126,22 +98,22 @@ int main()
 
 	if (f1)
 	{
-		trySign(boss, *f1);
-		tryExecute(boss, *f1);
+		boss.signForm(*f1);
+		boss.executeForm(*f1);
 		std::cout << std::endl;
 		delete f1;
 	}
 	if (f2)
 	{
-		trySign(boss, *f2);
-		tryExecute(boss, *f2);
+		boss.signForm(*f2);
+		boss.executeForm(*f2);
 		std::cout << std::endl;
 		delete f2;
 	}
 	if (f3)
 	{
-		trySign(boss, *f3);
-		tryExecute(boss, *f3);
+		boss.signForm(*f3);
+		boss.executeForm(*f3);
 		std::cout << std::endl;
 		delete f3;
 	}

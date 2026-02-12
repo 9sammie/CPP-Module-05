@@ -6,7 +6,7 @@
 /*   By: maballet <maballet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 18:24:16 by maballet          #+#    #+#             */
-/*   Updated: 2026/01/16 16:08:24 by maballet         ###   ########lyon.fr   */
+/*   Updated: 2026/02/12 18:20:37 by maballet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,23 @@ class Bureaucrat {
 	void		signForm(AForm& f);
 	void		executeForm(AForm const & form) const;
 
-};
+		class GradeTooHighException : public std::exception
+	{
+		public:
+			virtual const char* what() const throw()
+			{
+				return "grade too high";
+			}
+	};
 
-class GradeTooHighException : public std::exception {
+	class GradeTooLowException : public std::exception
+	{
 	public:
-		virtual const char* what() const throw() {
-			return "Grade too high ";
+		virtual const char* what() const throw()
+		{
+			return "grade too low";
 		}
-};
-
-class GradeTooLowException : public std::exception {
-	public:
-		virtual const char* what() const throw() {
-			return "Grade too low ";
-		}
+	};
 };
 
 inline std::ostream& operator<<(std::ostream& os, const Bureaucrat& b)

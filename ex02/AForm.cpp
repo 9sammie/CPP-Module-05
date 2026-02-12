@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "AForm.hpp"
+#include "Bureaucrat.hpp"
 
 AForm::AForm(): _name(NULL), _signed(false),  _signGrade(0), _execGrade(0) {}
 
@@ -18,9 +19,9 @@ AForm::AForm(std::string name, std::string target, int signGrade, int execGrade)
 	_name(name), _target(target), _signed(false), _signGrade(signGrade), _execGrade(execGrade)
 {
 	if (_signGrade > 150 || _execGrade > 150)
-		throw GradeTooLowException();
-	if (+signGrade < 1 || _execGrade < 1)
-		throw GradeTooHighException();
+		throw AForm::GradeTooLowException();
+	if (_signGrade < 1 || _execGrade < 1)
+		throw AForm::GradeTooHighException();
 }
 
 AForm::AForm(const AForm& other): 
@@ -44,15 +45,15 @@ int AForm::getExecGrade() const { return(this->_execGrade); }
 void AForm::beSigned(const Bureaucrat& b) 
 {
 	if (b.getGrade() > _signGrade)
-		throw GradeTooLowException();
+		throw AForm::GradeTooLowException();
 	_signed = true;
 }
 
 void AForm::execute(Bureaucrat const & executor) const
 {
 	if (_signed == 0)
-		throw AFormNotSignedException();
+		throw AForm::NotSignedException();
 	if (executor.getGrade() > getExecGrade())
-		throw GradeTooLowException();
+		throw AForm::GradeTooLowException();
 	executeAction();
 }

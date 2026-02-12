@@ -6,7 +6,7 @@
 /*   By: maballet <maballet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 19:31:28 by maballet          #+#    #+#             */
-/*   Updated: 2026/01/16 16:04:46 by maballet         ###   ########lyon.fr   */
+/*   Updated: 2026/02/12 22:08:14 by maballet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ Bureaucrat::Bureaucrat(std::string name, int grade):
 	_grade(grade)
 {
 	if (grade > 150)
-		throw GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException();
 	if (grade < 1)
-		throw GradeTooHighException();
+		throw Bureaucrat::GradeTooHighException();
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& other):
@@ -53,22 +53,40 @@ void Bureaucrat::incrementGrade()
 {
 	this->_grade--;
 	if (this->_grade < 1)
-		throw GradeTooHighException();
+		throw Bureaucrat::GradeTooHighException();
 }
 
 void Bureaucrat::decrementGrade()
 {
 	this->_grade++;
 	if (this->_grade > 150)
-		throw GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException();
 }
 
 void Bureaucrat::signForm(AForm& f)
 {
-	f.beSigned(*this);
+	try
+	{
+		f.beSigned(*this);
+		std::cout << YELLOW << this->getName() << " signed " << f.getName() << STD << std::endl;
+	}
+	catch (std::exception& e)
+	{
+		std::cout << PINK << this->getName() << " couldn't sign " << f.getName()
+				<< " because " << e.what() << " (ó﹏ò｡)" << STD << std::endl;
+	}
 }
 
 void Bureaucrat::executeForm(AForm const & form) const
 {
-	form.execute(*this);
+	try
+	{
+		form.execute(*this);
+		std::cout << GREEN << this->getName() << " executed " << form.getName() << STD << std::endl;
+	}
+	catch (std::exception& e)
+	{
+		std::cout << PINK << this->getName() << " couldn't execute " << form.getName()
+				<< " because " << e.what() << " (ó﹏ò｡)" << STD << std::endl;
+	}
 }

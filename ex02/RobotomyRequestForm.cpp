@@ -6,7 +6,7 @@
 /*   By: maballet <maballet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 20:11:36 by maballet          #+#    #+#             */
-/*   Updated: 2026/01/16 08:38:32 by maballet         ###   ########lyon.fr   */
+/*   Updated: 2026/02/12 17:27:30 by maballet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other):  AFo
 
 void RobotomyRequestForm::executeAction() const
 {
+	srand(time(NULL));
 	std::cout << BLUE << "* OH GOD NO PLEASE NOOOESAFDGDKGEROGGWFZPZONONZZBZZZZZZZZZZZZ * " << STD << std::endl;
 	int fiftyFifty = rand() % 2;
 	if (fiftyFifty == 0)

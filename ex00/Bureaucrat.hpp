@@ -6,7 +6,7 @@
 /*   By: maballet <maballet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 18:24:16 by maballet          #+#    #+#             */
-/*   Updated: 2026/01/16 16:18:34 by maballet         ###   ########lyon.fr   */
+/*   Updated: 2026/02/12 18:13:47 by maballet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 #define STD			"\033[0m"
 #define GREYBG		"\033[48;5;237m"
 
-class Bureaucrat {
-
+class Bureaucrat
+{
 	private:
 
 	const std::string	_name;
@@ -44,20 +44,23 @@ class Bureaucrat {
 	void		incrementGrade();
 	void		decrementGrade();
 
-};
+	class GradeTooHighException : public std::exception
+	{
+		public:
+			virtual const char* what() const throw()
+			{
+				return "grade too high";
+			}
+	};
 
-class GradeTooHighException : public std::exception {
+	class GradeTooLowException : public std::exception
+	{
 	public:
-		virtual const char* what() const throw() {
-			return "grade too high";
-		}
-};
-
-class GradeTooLowException : public std::exception {
-	public:
-		virtual const char* what() const throw() {
+		virtual const char* what() const throw()
+		{
 			return "grade too low";
 		}
+	};
 };
 
 inline std::ostream& operator<<(std::ostream& os, const Bureaucrat& b)

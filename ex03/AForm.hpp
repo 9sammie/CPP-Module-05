@@ -6,7 +6,7 @@
 /*   By: maballet <maballet@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 22:16:53 by maballet          #+#    #+#             */
-/*   Updated: 2026/01/16 08:38:55 by maballet         ###   ########lyon.fr   */
+/*   Updated: 2026/02/12 19:44:47 by maballet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 
 #include <iostream>
 #include <exception>
-#include "Bureaucrat.hpp"
 
 class Bureaucrat;
 
@@ -54,27 +53,30 @@ class AForm {
 	virtual void		beSigned(const Bureaucrat& b);
 	virtual void		execute(Bureaucrat const & executor) const;
 
-};
-
-class AFormGradeTooHighException : public std::exception {
-	public:
-		virtual const char* what() const throw() {
-			return "AForm grade too high ";
-		}
-};
-
-class AFormGradeTooLowException : public std::exception {
-	public:
-		virtual const char* what() const throw() {
-			return "AForm grade too low ";
-		}
-};
-
-class AFormNotSignedException : public std::exception {
-	public:
-		virtual const char* what() const throw() {
-			return "AForm not signed ";
-		}
+	class GradeTooHighException : public std::exception
+	{
+		public:
+			virtual const char* what() const throw()
+			{
+				return "Form grade too high";
+			}
+	};
+	
+	class GradeTooLowException : public std::exception
+	{
+		public:
+			virtual const char* what() const throw()
+			{
+				return "Form grade too low";
+			}
+	};
+	
+	class NotSignedException : public std::exception {
+		public:
+			virtual const char* what() const throw() {
+				return "AForm not signed ";
+			}
+	};
 };
 
 inline std::ostream& operator<<(std::ostream& os, const AForm& f)
